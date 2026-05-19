@@ -1,0 +1,27 @@
+# Ultralytics 🚀 AGPL-3.0 License - https://ultralytics.com/license
+
+# Default Ultralytics settings for BoT-SORT tracker when using mode="track"
+# For documentation and examples see https://docs.ultralytics.com/modes/track/
+# For BoT-SORT source code see https://github.com/NirAharon/BoT-SORT
+
+tracker_type: botsort # ['botsort', 'bytetrack'] 指定跟踪器类型。选项有 botsort 或 bytetrack.
+track_high_thresh: 0.25 # 跟踪过程中使用的首次关联阈值。影响检测与现有轨迹匹配的可信度 0.0-1.0
+track_low_thresh: 0.1 # 跟踪期间第二次关联的阈值。当第一次关联失败时使用，标准更宽松。0.0-1.0
+new_track_thresh: 0.25 # 如果检测结果与任何现有轨迹不匹配，用于初始化新轨迹的阈值。控制何时认为出现了新对象。0.0-1.0
+track_buffer: 100 # 缓冲区，用于表示丢失的轨道在被移除前应保持存活的帧数。数值越大，表示对遮挡的容忍度越高。>=0
+match_thresh: 0.7 # 匹配轨迹的阈值。数值越大，匹配越宽松。0.0-1.0
+fuse_score: True # 决定是否在匹配前将置信度分数与 IoU 距离融合。有助于在关联时平衡空间信息和置信度信息。True, False
+# min_box_area: 10  # threshold for min box areas(for tracker evaluation, not used for now)
+
+# BoT-SORT settings
+gmc_method: sparseOptFlow # 用于全局运动补偿的方法。有助于考虑摄像机的运动，改善跟踪效果。orb, sift, ecc, sparseOptFlow, None
+# ReID model related thresh
+proximity_thresh: 0.3 # 与 ReID（重新识别）有效匹配所需的最小 IoU。在使用外观线索之前确保空间接近度。0.0-1.0
+appearance_thresh: 0.2 # 	ReID 所需的最小外观相似度。设置两个检测结果在视觉上的相似程度，以便进行链接。0.0-1.0
+with_reid: True  #表示是否使用 ReID。启用基于外观的匹配，以便更好地跟踪遮挡物。仅 BoTSORT 支持。True, False
+model: auto # 指定要使用的模型。默认为 auto如果检测器是YOLO，则使用本地特征，否则使用 yolo11n-cls.pt. auto, yolo11[nsmlx]-cls.pt
+
+#启用重新识别（ReID）
+# 默认情况下，ReID 是关闭的，以尽量减少性能开销。启用 ReID 非常简单，只需设置 with_reid: True 在 跟踪器配置.您还可以自定义 model 用于 ReID，让您可以根据使用情况权衡精度和速度：
+# 本地功能 (model: auto):它直接利用YOLO 检测器的 ReID 功能，只需增加极少的开销。当你需要某种程度的 ReID 而又不明显影响性能时，它是理想的选择。如果检测器不支持本地功能，它会自动退回到使用 yolo11n-cls.pt.
+# YOLO 分类模型:您可以明确设置分类模型（例如 yolo11n-cls.pt)进行 ReID 特征提取。这提供了更具区分度的嵌入，但由于额外的推理步骤而带来了额外的延迟。

@@ -1,0 +1,121 @@
+# ===== Python =====
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg
+*.egg-info/
+.eggs/
+build/
+dist/
+develop-eggs/
+downloads/
+parts/
+sdist/
+wheels/
+share/python-wheels/
+*.manifest
+*.spec
+pip-log.txt
+pip-delete-this-directory.txt
+
+# ===== 虚拟环境 =====
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# ===== IDE =====
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.pydevproject
+
+# ===== 系统文件 =====
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# ===== 日志和运行产物 =====
+nohup.out
+*.log
+logs/*
+!logs/.gitkeep
+debug_frames/
+result1/*
+!result1/.gitkeep
+result/
+
+# ===== 任务/事件数据 =====
+task/*.json
+!task/.gitkeep
+*.json.lock
+
+# ===== 模型权重（大文件，部署时手动放置或从对象存储下载） =====
+weights/*.pt
+weights/*.pth
+weights/*.onnx
+weights/*.engine
+weights/*.tflite
+weights/*.bin
+!weights/.gitkeep
+
+# ===== ultralytics =====
+# 通过 git submodule 引用官方仓库，不忽略 ultralytics/ 目录
+
+# ===== ultralytics 仓库副本（误复制到根目录，不应提交） =====
+/docker/
+/docs/
+/examples/
+/tests/
+
+# ===== 项目配置（需要提交到 git） =====
+# config/ 目录包含 botsort.yaml 等跟踪器配置，需要提交
+# config/
+
+# ===== 测试 / 覆盖率 =====
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+coverage.xml
+*.cover
+.hypothesis/
+
+# ===== Jupyter =====
+.ipynb_checkpoints/
+
+# ===== 类型检查缓存 =====
+.mypy_cache/
+.dmypy.json
+.pyre/
+.pytype/
+
+# ===== 敏感配置（必须忽略） =====
+.env
+.env.*
+!.env.example
+secrets.yaml
+secrets.json
+credentials.json
+*.key
+*.pem
+
+# ===== 临时文件 =====
+*.tmp
+*.bak
+*.orig
+*.lock
